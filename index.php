@@ -47,28 +47,27 @@ $result = mysqli_query($conn, "SELECT * FROM products");
 
 <hr>
 <h3>Barcha mahsulotlar</h3>
-<table border="1" cellpadding="5" cellspacing="0">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Actions</th>
-    </tr>
-    <?php while($product = mysqli_fetch_assoc($result)) { ?>
-    <tr>
-        <td><?php echo $product['id']; ?></td>
-        <td><?php echo $product['name']; ?></td>
-        <td><?php echo $product['price']; ?></td>
-        <td><?php echo $product['quantity']; ?></td>
-        <td>
-            <a href="index.php?edit=<?php echo $product['id']; ?>">Edit</a> |
-            <a href="index.php?delete=<?php echo $product['id']; ?>" onclick="return confirm('Are you sure?')">Delete</a>
-        </td>
-    </tr>
-    <?php } ?>
+<table>
+    <th>Id</th>
+    <th>name</th>
+    <th>price</th>
+    <th>quantity</th>
+    <th>Actions</th>
+    <?php 
+    foreach ($result as $row) {
+        echo "<tr>";
+        echo "<td>{$row['id']}</td>";
+        echo "<td>{$row['name']}</td>";
+        echo "<td>{$row['price']}</td>";
+        echo "<td>{$row['quantity']}</td>";
+        echo "<td>";
+        echo "<a href='?edit={$row['id']}'>Edit</a> | ";        
+        echo "<a href='?delete={$row['id']}'>Delete</a>";
+        echo "</td>";
+        echo "</tr>";
+    }
+    ?>
 </table>
-
 <hr>
 
 <?php
